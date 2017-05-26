@@ -1,6 +1,6 @@
 # mixpanel_viz
 
-This is my solution for a coding challenge for a job interview in which I'm, as of the time of this writing, a candidate. I created a visualization using HTML/CSS/Javascript/d3. The data and instructions for this challenge can be found in the mixpanel directory.
+This is my solution to a coding challenge for a company which, as of the time of this writing, I am a job candidate. I created a visualization using HTML/CSS/Javascript/d3. The data and instructions for this challenge can be found in the mixpanel directory.
 
 ## Displaying the visualization
 
