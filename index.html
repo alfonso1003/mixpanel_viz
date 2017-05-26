@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Email Visualization</title>
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src="scatterPlot.js" charset="utf-8"></script>
+  <script src="utility.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <!-- container for dropdown  -->
+  <div id="myDropDown" style="float:right;  padding-right: 5px;"> </div>
+  <!-- container for visualisation  -->
+  <section id="vis"></section>
+  <script>
+    d3.json("data.json", function (data) {
+      // Get type of events.
+      var events = d3.map(data, function (d) {
+        return d.event.replace(/ *\'[^)]*\'/g, "");
+      }).keys();
+
+      var select = populateDropDown(events, "#myDropDown");
+      // Get Distinct IDs.
+      var DistinctIDs = d3.map(data, function (d) {
+        return d.properties.distinct_id;
+      }).keys();
+      
+      /*Convert to time and number
+      data.forEach(function (d) {
+        d.properties.time = d.properties.time;  //new Date(+d.properties.time*1000).toTimeString(); //
+        d.properties.distinct_id = +d.properties.distinct_id;
+      });
+      */
+      // Draw Scatter Chart
+      drawScaterChart("#vis", data);
+      // On dropdown value change
+      select.on("change", function (d) {
+        var value = d3.select(this).property("value");
+        var eventData = filterData(data, value);
+
+        d3.select("#vis").html("");
+        // Draw Scatter Chart
+        drawScaterChart("#vis", eventData);
+      });
+    });
+  </script>
+</body>
+
+</html>
